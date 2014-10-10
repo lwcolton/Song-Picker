@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Command line utility for leveraging song_picker"""
 import argparse
 
 from song_picker import Song, SongPicker
@@ -15,7 +16,8 @@ args = argparser.parse_args()
 
 song_choices = Song.create_many_from_mp3_dir(args.mp3_dir)
 
-song_subset = SongPicker.get_songs_for_duration(int(args.duration), song_choices)
+song_subset = SongPicker.get_songs_for_duration(
+    int(args.duration), song_choices)
 
 def print_song(song):
     print "Title: %s\nArtist: %s\nLength: %d" % \
