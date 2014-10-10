@@ -1,0 +1,3 @@
+--allow-external eyed3
+--allow-unverified eyed3 
+eyed3==0.7.5
