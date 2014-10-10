@@ -95,7 +95,7 @@ class Song(object):
         if clean_mp3_paths.isempty():
             raise EnvironmentError("No mp3's found in: %s" % path_to_mp3_dir)
 
-        for mp3_path in clean_mp3_paths
+        for mp3_path in clean_mp3_paths:
             songs.append(cls.create_from_mp3_path(mp3_path))
 
         return songs
