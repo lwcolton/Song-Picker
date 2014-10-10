@@ -90,9 +90,9 @@ class Song(object):
         """
         songs = []
         path_to_mp3_dir = os.path.abspath(path_to_mp3_dir)
-        dirty_mp3_paths = os.listdir(path_to_mp3_dir)
-        clean_mp3_paths = [mp3_path for mp3_path in 
-            dirty_mp3_paths if mp3_path.lower().endswith(".mp3")]
+        dirty_mp3_names = os.listdir(path_to_mp3_dir)
+        clean_mp3_paths = [os.path.join(path_to_mp3_dir, mp3_path) for mp3_path in 
+            dirty_mp3_names if mp3_path.lower().endswith(".mp3")]
 
         if not clean_mp3_paths:
             raise EnvironmentError("No mp3's found in: %s" % path_to_mp3_dir)
