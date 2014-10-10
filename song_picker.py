@@ -9,9 +9,8 @@ please be gentle with the PEP standards). As you can see, I'm also
 using a few Google-Style docstrings.  I'm sure there are a couple
 minor infractions, but I did run pylint for a 10/10 :)
 """
-from os import listdir
+import os
 import random
-
 
 
 class Song(object):
