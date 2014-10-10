@@ -6,21 +6,41 @@ unecessary in this context, I wanted to show that I know how to
 optimize my code to this level. This code adheres to PEP8, which is
 why no line is longer than 72/79 characters (I'm still learning,
 please be gentle with the PEP standards). As you can see, I'm also
-using Google-Style docstrings.  I'm sure there are a couple
+using a few Google-Style docstrings.  I'm sure there are a couple
 minor infractions, but I did run pylint for a 10/10 :)
 """
+from os import listdir
 import random
+try:
+    import eyed3 #Used to inspect MP3 files in the filesystem for meta-data
+except ImportError:
+    eyed3 = None #mp3 support is disabled
 
 class Song(object):
-    """Represents a song and its various meta attributes"""
-    def __init__(self, title, length, file_path):
+    """Represents a song and its various meta attributes.
+
+    I probably could have just used the class in eyed3,
+    but by the time I pulled that library in this already existed.
+    I also wanted to give an example of abstracting a data structure.
+    """
+    def __init__(self, title, artist, album, length, file_path):
         self._title = title
+        self._artist = artist
+        self._album = album
         self._length = length
         self._file_path = file_path
 
     def get_title(self):
         """Returns the title of this song"""
         return self._title
+
+    def get_artist(self):
+        """Returns the artist who created this song"""
+        return self._artist
+
+    def get_album(self):
+        """Returns the album of this song"""
+        return self._get_album
 
     def get_length(self):
         """Returns the length of this song, in seconds"""
@@ -30,7 +50,49 @@ class Song(object):
         """Returns the file path to this song"""
         return self._file_path
 
+    @staticmethod
+    def raise_if_no_eyed3():
+        """Throws an environment error if eyed3 is unavailable"""
+        if eyed3 == None:
+            raise EnvironmentError("No eyed3 module is available")
 
+    @classmethod
+    def create_from_eyed3_file(cls, audio_file):
+        """Given an eyed3 audiofile object, returns a Song object"""
+        cls.raise_if_no_eyed3()
+
+        if not isinstance(audio_file, eyed3.core.AudioFile):
+            raise TypeError("You broke promises :(")
+
+        return Song(
+            audio_file.tag.title, audio_file.tag.artist, audio_file.tag.album,
+            audio_file.info.time_secs, audio_file.path)
+
+    @classmethod
+    def create_from_mp3_path(cls, mp3_path):
+        """Given a path to an mp3, returns a Song object"""
+        cls.raise_if_no_eyed3()
+
+        audio_file = eyed3.load(mp3_path)
+        return cls.create_from_eyed3_file(audio_file)
+
+    @classmethod
+    def create_many_from_mp3_dir(cls, path_to_mp3_dir):
+        """Given a path to a directory of MP3's, 
+        returns a list of Song's.
+
+        Args:
+            path_to_mp3_dir (str): A path to a directory containing mp3
+                files.  Each file must end with the .mp3 extension,
+                and files that don't will be ignored.
+        """
+        songs = []
+        for mp3_path in os.listdir(path_to_mp3_dir):
+            if mp3_path.endswith(".mp3"):
+                songs.append(cls.create_from_mp3_path(mp3_path))
+
+        return songs
+                
 class NoAvailableSongError(BaseException):
     """Thrown when no song that meets the specified criteria
     can be found
@@ -157,17 +219,3 @@ class SongPicker(object):
                     current_winning_song = this_song
                     current_winning_length = this_song_length
         return current_winning_song
-
-def trial_run():
-    """Show off our hard work!"""
-    song_list = [
-        Song("test1", 127, "test"), Song("test1", 127, "test"),
-        Song("test1", 127, "test")
-    ]
-    chosen_songs = SongPicker.get_songs_for_duration(1000, song_list)
-    duration = sum([song.get_length() for song in chosen_songs])
-    print "Got %d songs with a total duration of %d seconds" % \
-        (len(chosen_songs), duration)
-
-if __name__ == '__main__':
-    trial_run()
