@@ -15,6 +15,6 @@ args = argparser.parse_args()
 
 song_choices = Song.create_many_from_mp3_dir(args.mp3_dir)
 
-song_subset = SongPicker.get_songs_for_duration(args.duration, song_choices)
+song_subset = SongPicker.get_songs_for_duration(int(args.duration), song_choices)
 
 print song_subset

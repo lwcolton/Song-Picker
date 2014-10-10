@@ -132,6 +132,7 @@ class SongPicker(object):
         """
         song_subset = []
         current_duration = 0
+        max_duration = int(max_duration)
 
         #Making a list of available song indexes allows us to
         #avoid randomly selecting songs that have already been chosen,
