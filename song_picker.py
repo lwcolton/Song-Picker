@@ -73,7 +73,8 @@ class Song(object):
     def create_from_mp3_path(cls, mp3_path):
         """Given a path to an mp3, returns a Song object"""
         import eyed3
-
+        
+        mp3_path = os.path.abspath(mp3_path)
         audio_file = eyed3.load(mp3_path)
         return cls.create_from_eyed3_file(audio_file)
 
