@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Command line utility for leveraging song_picker"""
 import argparse
+import datetime
 
 from song_picker import Song, SongPicker
 
@@ -20,8 +21,8 @@ song_subset = SongPicker.get_songs_for_duration(
     int(args.duration), song_choices)
 
 def print_song(song):
-    print "Title: %s\nArtist: %s\nLength: %d" % \
-        (song.get_title(), song.get_artist(), (song.get_length()) / 60)
+    print "Title: %s\nArtist: %s\nLength: %s" % \
+        (song.get_title(), song.get_artist(), str(datetime.timedelta(seconds=song.get_length())))
 
 for song_index, song in enumerate(song_subset):
     print "Song %d\n================" % song_index
