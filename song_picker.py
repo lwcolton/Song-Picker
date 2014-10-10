@@ -173,7 +173,7 @@ class SongPicker(object):
                     #I promise I never ever catch exceptions
                     #without logging
                     print "Can not fit any more songs into total "\
-                        "duration %d with %d currently remaining" % \
+                        "duration %d with %d currently remaining\n" % \
                         (max_duration, remaining_duration)
 
                 return song_subset

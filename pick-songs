@@ -17,4 +17,12 @@ song_choices = Song.create_many_from_mp3_dir(args.mp3_dir)
 
 song_subset = SongPicker.get_songs_for_duration(int(args.duration), song_choices)
 
-print song_subset
+def print_song(song):
+    print "Title: %s\nArtist: %s\nLength: %d" % \
+        (song.get_title(), song.get_artist(), (song.get_length()) / 60)
+
+for song_index, song in enumerate(song_subset):
+    print "Song %d\n================" % song_index
+    print_song(song)
+    print "\n"
+
