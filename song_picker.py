@@ -92,7 +92,7 @@ class Song(object):
         clean_mp3_paths = [mp3_path for mp3_path in 
             dirty_mp3_paths if mp3_path.lower().endswith(".mp3")]
 
-        if clean_mp3_paths.isempty():
+        if not clean_mp3_paths:
             raise EnvironmentError("No mp3's found in: %s" % path_to_mp3_dir)
 
         for mp3_path in clean_mp3_paths:
