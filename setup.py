@@ -16,6 +16,6 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
     ], 
     py_modules=["song_picker.py"],
-    scripts = 
+    scripts=["pick-songs"],
 )
     

@@ -12,9 +12,7 @@ a requirements.txt file, which you can use with `pip -r` to install
 my dependencies!  Afterwords, just run  
 `pip install file://<absolute path to package source>`  
   
-song_picker.py can be run directly from the command line, as 
-`song_picker.py` on *nix and `python song_picker.py` on Windows.
-You may also import the Song and SongPicker classes to leverage
-the library in your own code.  I realize that in real life 
-splitting the library and command-line tools into separate
-files would be necessary, but, eh...
+##Resources:
+This package includes two files:
+1. song_picker.py:  A module containing the song-picking-library-goodies
+2. pick-songs: A command line utility for picking songs 
