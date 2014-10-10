@@ -1,10 +1,12 @@
-#Song Picker Code Sample
+#Song Picker
   
-Hi LeadPages!  This is my code sample package.  It's a song picking
-utility, for choosing a list of songs that within a certain total
+This is a song picking utility, for choosing a list of songs that within a certain total
 duration.  For instance, if you go to the gym for an hour every day,
 and want a different 60 minute playlist every time, this is
-the tool for you!  
+the tool for you!  P.S. I'm not a markdown expert so pleae no judging.  
+  
+##Getting the source:
+Clone this repository!
   
 ##Installation:
 I usually use pip + virtualenv for managing my installs.  Thus, you will find
@@ -23,18 +25,8 @@ positional arguments:
   duration    The total duration the song list should approach, but not exceed
 
 optional arguments:
-  -h, --help  show this help message and exit
-$
-$ pick-songs ./ 60
-Can not fit any more songs into total duration 60 with 1 currently remaining
-
-Song 0
-================
-Title: Allegro from Duet in C Major
-Artist: None
-Length: 0`
-
+  -h, --help  show this help message and exit`  
 ##Resources:
 This package includes two files:        
-1. song_picker.py:  A module containing the song-picking-library-goodies
+1. song_picker.py:  A module containing the song-picking-library-goodies  
 2. pick-songs: A command line utility for picking songs 
