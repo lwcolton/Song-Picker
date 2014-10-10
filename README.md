@@ -8,8 +8,9 @@ the tool for you!
   
 ##Installation:
 I usually use pip + virtualenv for managing my installs.  Thus, you will find
-a requirements.txt file, which you can use with `pip -r` to install
-my dependencies!  Afterwords, just run  
+a requirements.txt file, which you can use with  
+`pip -r`  
+to install my dependencies!  Afterwords, just run  
 `pip install file://<absolute path to package source>`  
   
 ##Usage:
