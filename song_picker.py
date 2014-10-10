@@ -88,6 +88,7 @@ class Song(object):
                 and files that don't will be ignored.
         """
         songs = []
+        path_to_mp3_dir = os.path.abspath(path_to_mp3_dir)
         dirty_mp3_paths = os.listdir(path_to_mp3_dir)
         clean_mp3_paths = [mp3_path for mp3_path in 
             dirty_mp3_paths if mp3_path.lower().endswith(".mp3")]
