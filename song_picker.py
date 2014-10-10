@@ -27,7 +27,7 @@ class Song(object):
 
     def get_album(self):
         """Returns the album of this song"""
-        return self._get_album
+        return self._album
 
     def get_length(self):
         """Returns the length of this song, in seconds"""
@@ -36,12 +36,6 @@ class Song(object):
     def get_file_path(self):
         """Returns the file path to this song"""
         return self._file_path
-
-    @staticmethod
-    def raise_if_no_eyed3():
-        """Throws an environment error if eyed3 is unavailable"""
-        if eyed3 == None:
-            raise EnvironmentError("No eyed3 module is available")
 
     @classmethod
     def create_from_eyed3_file(cls, audio_file):
@@ -63,14 +57,14 @@ class Song(object):
     def create_from_mp3_path(cls, mp3_path):
         """Given a path to an mp3, returns a Song object"""
         import eyed3
-        
+
         mp3_path = os.path.abspath(mp3_path)
         audio_file = eyed3.load(mp3_path)
         return cls.create_from_eyed3_file(audio_file)
 
     @classmethod
     def create_many_from_mp3_dir(cls, path_to_mp3_dir):
-        """Given a path to a directory of MP3's, 
+        """Given a path to a directory of MP3's,
         returns a list of Song's.
 
         Args:
@@ -81,8 +75,11 @@ class Song(object):
         songs = []
         path_to_mp3_dir = os.path.abspath(path_to_mp3_dir)
         dirty_mp3_names = os.listdir(path_to_mp3_dir)
-        clean_mp3_paths = [os.path.join(path_to_mp3_dir, mp3_path) for mp3_path in 
-            dirty_mp3_names if mp3_path.lower().endswith(".mp3")]
+        clean_mp3_paths = [
+            os.path.join(path_to_mp3_dir, mp3_path) for
+            mp3_path in dirty_mp3_names if
+            mp3_path.lower().endswith(".mp3")
+        ]
 
         if not clean_mp3_paths:
             raise EnvironmentError("No mp3's found in: %s" % path_to_mp3_dir)
@@ -91,7 +88,7 @@ class Song(object):
             songs.append(cls.create_from_mp3_path(mp3_path))
 
         return songs
-                
+
 class NoAvailableSongError(BaseException):
     """Thrown when no song that meets the specified criteria
     can be found
