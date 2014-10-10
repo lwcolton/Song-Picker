@@ -11,10 +11,8 @@ minor infractions, but I did run pylint for a 10/10 :)
 """
 from os import listdir
 import random
-try:
-    import eyed3 #Used to inspect MP3 files in the filesystem for meta-data
-except ImportError:
-    eyed3 = None #mp3 support is disabled
+
+
 
 class Song(object):
     """Represents a song and its various meta attributes.
@@ -59,7 +57,11 @@ class Song(object):
     @classmethod
     def create_from_eyed3_file(cls, audio_file):
         """Given an eyed3 audiofile object, returns a Song object"""
-        cls.raise_if_no_eyed3()
+        #We are doing this here so we throw a very clear import error
+        #if eyed3 is unavailable, but only if someone is trying
+        #to use functionality that depends on it
+        #eyed3 is used to inspect MP3 files
+        import eyed3
 
         if not isinstance(audio_file, eyed3.core.AudioFile):
             raise TypeError("You broke promises :(")
@@ -71,7 +73,7 @@ class Song(object):
     @classmethod
     def create_from_mp3_path(cls, mp3_path):
         """Given a path to an mp3, returns a Song object"""
-        cls.raise_if_no_eyed3()
+        import eyed3
 
         audio_file = eyed3.load(mp3_path)
         return cls.create_from_eyed3_file(audio_file)
@@ -88,7 +90,7 @@ class Song(object):
         """
         songs = []
         for mp3_path in os.listdir(path_to_mp3_dir):
-            if mp3_path.endswith(".mp3"):
+            if mp3_path.lower().endswith(".mp3"):
                 songs.append(cls.create_from_mp3_path(mp3_path))
 
         return songs
