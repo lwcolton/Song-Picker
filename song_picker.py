@@ -1,14 +1,4 @@
-"""Module for generating lists of songs.
-
-The goal is to demonstrate my ability to write efficient code that
-is as readable as possible.  While obsessing over performance is really
-unecessary in this context, I wanted to show that I know how to
-optimize my code to this level. This code adheres to PEP8, which is
-why no line is longer than 72/79 characters (I'm still learning,
-please be gentle with the PEP standards). As you can see, I'm also
-using a few Google-Style docstrings.  I'm sure there are a couple
-minor infractions, but I did run pylint for a 10/10 :)
-"""
+"""Module for generating lists of songs."""
 import os
 import random
 

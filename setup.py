@@ -1,5 +1,5 @@
 """
-Setup.py for my lovely code sample
+Setup.py for my song picker package
 """
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 
@@ -7,8 +7,6 @@ setup(
     name="song_picker",
     version="1.0.0",
     description="Really awesome library for choosing songs",
-    author="Colton Leekley-Winslow",
-    author_email="lwcolton@gmail.com",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
